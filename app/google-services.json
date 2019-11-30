@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "524254527578",
+    "firebase_url": "https://guestlist-5578.firebaseio.com",
+    "project_id": "guestlist-5578",
+    "storage_bucket": "guestlist-5578.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524254527578:android:cd6eb006ad1906bf17d863",
+        "android_client_info": {
+          "package_name": "com.mobile.guestlist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "524254527578-a1r8dq6tkisqesssol94k05v4u4e0129.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCORPVOAe1trAtJgQsxOyEEhS-RWgM6W90"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "524254527578-a1r8dq6tkisqesssol94k05v4u4e0129.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
