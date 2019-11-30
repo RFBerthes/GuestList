@@ -1,5 +1,6 @@
 package com.mobile.guestlist;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -19,17 +20,20 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.view.Menu;
+import android.view.View;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
+    private ViewHolder mViewHolder = new ViewHolder();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.mViewHolder.mfabAddConvidado = (FloatingActionButton) this.findViewById(R.id.fabAddConvidado);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -37,8 +41,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        this.setListeners();
         this.startfragmentPadrao();
     }
+
 
     @Override
     public void onBackPressed() {
@@ -105,6 +111,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    private void setListeners() {
+        this.mViewHolder.mfabAddConvidado.setOnClickListener(this);
+    }
+
     private void startfragmentPadrao(){
         Fragment fragment = null;
         Class fragmentClass = TodosFragment.class;
@@ -118,5 +128,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment).commit();
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        if (id == R.id.fabAddConvidado){
+            Intent formulario = new Intent(this, FormularioActivity.class);
+            this.startActivity(formulario);
+        }
+    }
+
+    private static class ViewHolder{
+        FloatingActionButton mfabAddConvidado;
     }
 }

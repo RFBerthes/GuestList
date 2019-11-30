@@ -13,4 +13,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="txtNome">Nome</string>
+    <string name="txtConirmado">Conirmado</string>
+    <string name="txtPendente">Pendente</string>
+    <string name="txtNegado">Negado</string>
+    <string name="txtSalvar">SALVAR</string>
 </resources>
