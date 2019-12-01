@@ -5,7 +5,7 @@ public class Convidado {
     private String nome;
     private int status;
 
-    public int getId() {
+    public int getId(String s) {
         return id;
     }
 

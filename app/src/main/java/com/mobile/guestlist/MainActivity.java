@@ -11,6 +11,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.FirebaseApp;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -25,12 +26,13 @@ import android.view.View;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private ViewHolder mViewHolder = new ViewHolder();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.mViewHolder.mfabAddConvidado = (FloatingActionButton) this.findViewById(R.id.fabAddConvidado);
+        this.mViewHolder.mfabAddConvidado = this.findViewById(R.id.fabAddConvidado);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.setListeners();
         this.startfragmentPadrao();
     }
+
 
 
     @Override
@@ -111,6 +114,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        if (id == R.id.fabAddConvidado){
+            Intent formulario = new Intent(this, FormularioActivity.class);
+            this.startActivity(formulario);
+        }
+    }
+
     private void setListeners() {
         this.mViewHolder.mfabAddConvidado.setOnClickListener(this);
     }
@@ -130,14 +142,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment).commit();
     }
 
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        if (id == R.id.fabAddConvidado){
-            Intent formulario = new Intent(this, FormularioActivity.class);
-            this.startActivity(formulario);
-        }
-    }
 
     private static class ViewHolder{
         FloatingActionButton mfabAddConvidado;

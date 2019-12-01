@@ -1,12 +1,14 @@
 package com.mobile.guestlist;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class FormularioActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -16,7 +18,6 @@ public class FormularioActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
-
         this.mViewHolder.mEtNome = this.findViewById(R.id.etNome);
         this.mViewHolder.mrbConfirm = this.findViewById(R.id.rbConfirmado);
         this.mViewHolder.mrbPendente = this.findViewById(R.id.rbPendente);
@@ -41,7 +42,13 @@ public class FormularioActivity extends AppCompatActivity implements View.OnClic
 
     private void salvar() {
 
+        if (!this.validarSalvar()){
+            return;
+        }
+
         Convidado c = new Convidado();
+
+        //c.getId(reference.push().getKey());
         c.setNome(this.mViewHolder.mEtNome.getText().toString());
 
         if (this.mViewHolder.mrbConfirm.isChecked()){
@@ -52,6 +59,28 @@ public class FormularioActivity extends AppCompatActivity implements View.OnClic
             c.setStatus(Constantes.CONFIRMACAO.NEGADO);
         }
 
+        // Write a message to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Convidado");
+
+        myRef.setValue(c);
+
+        if (true){
+            Toast.makeText(this,getString(R.string.sucessoSalvar), Toast.LENGTH_LONG).show();
+        }else {
+            Toast.makeText(this,getString(R.string.erroSalvar), Toast.LENGTH_LONG).show();
+        }
+
+        finish();
+
+    }
+
+    private boolean validarSalvar() {
+        if (this.mViewHolder.mEtNome.getText().toString().equals("")){
+            this.mViewHolder.mEtNome.setError(getString(R.string.erroNome));
+            return false;
+        }
+        return true;
     }
 
     private static class  ViewHolder {

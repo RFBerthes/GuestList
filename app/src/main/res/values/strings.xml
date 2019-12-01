@@ -14,8 +14,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txtNome">Nome</string>
-    <string name="txtConirmado">Conirmado</string>
+    <string name="txtConfirmado">Confirmado</string>
     <string name="txtPendente">Pendente</string>
     <string name="txtNegado">Negado</string>
     <string name="txtSalvar">SALVAR</string>
+    <string name="erroNome">Nome é obrigatório</string>
+    <string name="sucessoSalvar">Convidado salvo com sucesso!</string>
+    <string name="erroSalvar">Algo de errado aconteceu...</string>
 </resources>
