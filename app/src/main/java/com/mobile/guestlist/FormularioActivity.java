@@ -30,8 +30,8 @@ public class FormularioActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.btnSalvar){
-            this.salvar();
+        if (v.getId() == R.id.btnSalvar) {
+            salvar();
         }
     }
 
@@ -48,22 +48,22 @@ public class FormularioActivity extends AppCompatActivity implements View.OnClic
 
         Convidado c = new Convidado();
 
-        //c.getId(reference.push().getKey());
+
         c.setNome(this.mViewHolder.mEtNome.getText().toString());
 
         if (this.mViewHolder.mrbConfirm.isChecked()){
             c.setStatus(Constantes.CONFIRMACAO.CONFIRMADO);
         }else if (this.mViewHolder.mrbPendente.isChecked()){
             c.setStatus(Constantes.CONFIRMACAO.PENDENTE);
-        }else{
+        }else if (this.mViewHolder.mrbNegado.isChecked()){
             c.setStatus(Constantes.CONFIRMACAO.NEGADO);
         }
 
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Convidado");
-
-        myRef.setValue(c);
+        DatabaseReference myRef = database.getReference("Convidados");
+        DatabaseReference ConvidadoRef = myRef.child("Convidados");
+        ConvidadoRef.push().setValue(c);
 
         if (true){
             Toast.makeText(this,getString(R.string.sucessoSalvar), Toast.LENGTH_LONG).show();
