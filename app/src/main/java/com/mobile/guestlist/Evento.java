@@ -1,22 +1,12 @@
 package com.mobile.guestlist;
 
-import android.media.Image;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.sql.Date;
-
-
 public class Evento {
 
     private int id;
 
-    private Image img;
-
     private String nome;
 
-    private Date data;
+    private String data;
 
     private int numConvidados;
 
@@ -29,9 +19,8 @@ public class Evento {
     }
 
 
-    public Evento(int id, Image img, String nome, Date data, int numConvidados, int numConfirmados, int numPendentes) {
+    public Evento(int id, String nome, String data, int numConvidados, int numConfirmados, int numPendentes) {
         this.id = id;
-        this.img = img;
         this.nome = nome;
         this.data = data;
         this.numConvidados = numConvidados;
@@ -39,19 +28,11 @@ public class Evento {
         this.numPendentes = numPendentes;
     }
 
-    public Image getImg() {
-        return img;
-    }
-
-    public void setImg(Image img) {
-        this.img = img;
-    }
-
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
@@ -94,8 +75,5 @@ public class Evento {
     public void setNumPendentes(int numPendentes) {
         this.numPendentes = numPendentes;
     }
-
-
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference ref = database.getReference("Eventos");
 }
+

@@ -2,20 +2,74 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_gravity="center">
 
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="173dp"
+
+
+    <TextView
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        app:srcCompat="@mipmap/ic_launcher" />
+        android:layout_width="wrap_content"
+        android:textSize="50dp"
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="173dp"
+        android:text="@string/txtListaEventos">
+
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+        android:layout_gravity="center_horizontal">
 
+        <ImageButton
+            android:id="@+id/ibEvento1"
+            android:layout_width="150dp"
+            android:layout_height="220dp"
+            android:layout_weight="2"
+            android:layout_margin="15dp"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <ImageButton
+            android:id="@+id/ibEvento2"
+            android:layout_width="150dp"
+            android:layout_height="220dp"
+            android:layout_weight="2"
+            android:layout_margin="15dp"
+            app:srcCompat="@android:drawable/btn_star_big_on" />
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="150dp"
+                android:layout_height="220dp"
+                android:layout_weight="2"
+                android:layout_margin="15dp"
+                app:srcCompat="@mipmap/ic_launcher" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="150dp"
+                android:layout_height="220dp"
+                android:layout_weight="2"
+                android:layout_margin="15dp"
+                app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
+
+

@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class FormularioActivity extends AppCompatActivity implements View.OnClickListener{
+public class FormularioActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ViewHolder mViewHolder = new ViewHolder();
 
@@ -42,20 +42,22 @@ public class FormularioActivity extends AppCompatActivity implements View.OnClic
 
     private void salvar() {
 
-        if (!this.validarSalvar()){
+        if (!this.validarSalvar()) {
             return;
         }
 
         Convidado c = new Convidado();
 
-
         c.setNome(this.mViewHolder.mEtNome.getText().toString());
 
-        if (this.mViewHolder.mrbConfirm.isChecked()){
+        if (this.mViewHolder.mrbConfirm.isChecked()) {
             c.setStatus(Constantes.CONFIRMACAO.CONFIRMADO);
-        }else if (this.mViewHolder.mrbPendente.isChecked()){
+        } else if (this.mViewHolder.mrbPendente.isChecked()) {
             c.setStatus(Constantes.CONFIRMACAO.PENDENTE);
-        }else if (this.mViewHolder.mrbNegado.isChecked()){
+        } else if (this.mViewHolder.mrbNegado.isChecked()) {
+            c.setStatus(Constantes.CONFIRMACAO.NEGADO);
+        } else {
+
             c.setStatus(Constantes.CONFIRMACAO.NEGADO);
         }
 
@@ -65,10 +67,10 @@ public class FormularioActivity extends AppCompatActivity implements View.OnClic
         DatabaseReference ConvidadoRef = myRef.child("Convidados");
         ConvidadoRef.push().setValue(c);
 
-        if (true){
-            Toast.makeText(this,getString(R.string.sucessoSalvar), Toast.LENGTH_LONG).show();
-        }else {
-            Toast.makeText(this,getString(R.string.erroSalvar), Toast.LENGTH_LONG).show();
+        if (true) {
+            Toast.makeText(this, getString(R.string.sucessoSalvar), Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, getString(R.string.erroSalvar), Toast.LENGTH_LONG).show();
         }
 
         finish();
@@ -76,14 +78,14 @@ public class FormularioActivity extends AppCompatActivity implements View.OnClic
     }
 
     private boolean validarSalvar() {
-        if (this.mViewHolder.mEtNome.getText().toString().equals("")){
+        if (this.mViewHolder.mEtNome.getText().toString().equals("")) {
             this.mViewHolder.mEtNome.setError(getString(R.string.erroNome));
             return false;
         }
         return true;
     }
 
-    private static class  ViewHolder {
+    private static class ViewHolder {
         EditText mEtNome;
         RadioButton mrbConfirm;
         RadioButton mrbPendente;

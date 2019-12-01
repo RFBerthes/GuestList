@@ -23,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/rbConfirmado"
+            android:layout_margin="10dp"
             android:text="@string/txtConfirmado">
         </RadioButton>
 
@@ -30,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/rbPendente"
+            android:layout_margin="10dp"
             android:text="@string/txtPendente">
         </RadioButton>
 
@@ -37,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/rbNegado"
+            android:layout_margin="10dp"
             android:text="@string/txtNegado">
         </RadioButton>
 
@@ -47,6 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/txtSalvar"
+        android:layout_margin="10dp"
         android:background="@color/colorAccent"
         android:textColor="@color/colorWhite"/>
 

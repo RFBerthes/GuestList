@@ -28,4 +28,13 @@ public class Convidado {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    public Convidado() {
+    }
+
+    public Convidado(int id, String nome, int status) {
+        this.id = id;
+        this.nome = nome;
+        this.status = status;
+    }
 }

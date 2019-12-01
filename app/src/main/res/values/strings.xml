@@ -21,4 +21,7 @@
     <string name="erroNome">Nome é obrigatório</string>
     <string name="sucessoSalvar">Convidado salvo com sucesso!</string>
     <string name="erroSalvar">Algo de errado aconteceu...</string>
+    <string name="txtNumero">Numero</string>
+    <string name="erroNumero">\"Número é obrigatório\"</string>
+    <string name="txtListaEventos">Lista de Eventos</string>
 </resources>
