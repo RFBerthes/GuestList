@@ -7,14 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".FormularioActivity">
 
-    <TextView
+    <EditText
+        android:id="@+id/etNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/txtNome"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:hint="@string/txtNome"/>
 
     <RadioGroup
         android:layout_width="match_parent"
@@ -25,24 +22,28 @@
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/rbConfirmado"
             android:text="@string/txtConirmado">
         </RadioButton>
 
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/rbPendente"
             android:text="@string/txtPendente">
         </RadioButton>
 
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/rbNegado"
             android:text="@string/txtNegado">
         </RadioButton>
 
     </RadioGroup>
 
     <Button
+        android:id="@+id/btnSalvar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/txtSalvar"
