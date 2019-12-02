@@ -13,6 +13,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class CadastroEventoActivity extends AppCompatActivity {
 
+
+
     EditText nomeEvento, dataEvento, horaEvento, enderecoEvento, capacidadeEvento;
     Button bntSalvar;
     Evento evento;
@@ -62,7 +64,7 @@ public class CadastroEventoActivity extends AppCompatActivity {
 
         // Insere no firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Evento");
+        DatabaseReference myRef = database.getReference("Eventos");
         myRef.push().setValue(evento);
 
 

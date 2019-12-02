@@ -5,30 +5,34 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class EventosActivity extends AppCompatActivity implements View.OnClickListener{
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("Evento");
 
+    DatabaseReference databaseReference;
     private ViewHolder mViewHolder = new ViewHolder();
     private ListView lvEventos;
     ArrayList<String> arrayEventos = new ArrayList<>();
+    ArrayAdapter<String> arrayAdapter;
 
 
     @Override
@@ -38,14 +42,39 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        databaseReference = FirebaseDatabase.getInstance().getReference("Eventos");
         lvEventos = findViewById(R.id.lvEventos);
-        lvEventos.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        arrayAdapter = new ArrayAdapter<String>(this, R.layout.layout_lista_eventos);
+        lvEventos.setAdapter(arrayAdapter);
+        databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //excluir((Evento) adapterView.getItemAtPosition(i));
-                return true;
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                String valor=dataSnapshot.getValue(Evento.class).toString();
+                arrayEventos.add(valor);
+                arrayAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
+
 
         this.mViewHolder.mfabAddEvento = this.findViewById(R.id.btnNovoEvento);
         this.setListeners();
@@ -61,33 +90,9 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onStart() {
         super.onStart();
-        carregarLista();
 
     }
 
-    private void carregarLista() {
-
-
-
-        // Read from the database
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.d(TAG, "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-
-    }
 
     @Override
     public void onClick(View v) {
