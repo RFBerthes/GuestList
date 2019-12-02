@@ -62,9 +62,8 @@ public class CadastroEventoActivity extends AppCompatActivity {
 
         // Insere no firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Eventos");
-        DatabaseReference EventoRef = myRef.child("Evento");
-        EventoRef.push().setValue(evento);
+        DatabaseReference myRef = database.getReference("Evento");
+        myRef.push().setValue(evento);
 
 
         if (true) {
