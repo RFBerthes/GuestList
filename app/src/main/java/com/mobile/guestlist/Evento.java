@@ -4,38 +4,6 @@ public class Evento {
 
     private int id;
 
-    private String nome;
-
-    private String data;
-
-    private int numConvidados;
-
-    private int numConfirmados;
-
-    private int numPendentes;
-
-
-    public Evento() {
-    }
-
-
-    public Evento(int id, String nome, String data, int numConvidados, int numConfirmados, int numPendentes) {
-        this.id = id;
-        this.nome = nome;
-        this.data = data;
-        this.numConvidados = numConvidados;
-        this.numConfirmados = numConfirmados;
-        this.numPendentes = numPendentes;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
     public int getId() {
         return id;
     }
@@ -52,28 +20,53 @@ public class Evento {
         this.nome = nome;
     }
 
-    public int getNumConvidados() {
-        return numConvidados;
+    public String getData() {
+        return data;
     }
 
-    public void setNumConvidados(int numConvidados) {
-        this.numConvidados = numConvidados;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    public int getNumConfirmados() {
-        return numConfirmados;
+    public String getHora() {
+        return hora;
     }
 
-    public void setNumConfirmados(int numConfirmados) {
-        this.numConfirmados = numConfirmados;
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 
-    public int getNumPendentes() {
-        return numPendentes;
+    public String getEndereco() {
+        return endereco;
     }
 
-    public void setNumPendentes(int numPendentes) {
-        this.numPendentes = numPendentes;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
+
+    public String getCapacidade() {
+        return capacidade;
+    }
+
+    public void setCapacidade(String capacidade) {
+        this.capacidade = capacidade;
+    }
+
+    public String getResponsavel() {
+        return responsavel;
+    }
+
+    public void setResponsavel(String responsavel) {
+        this.responsavel = responsavel;
+    }
+
+    private String nome;
+    private String data;
+    private String hora;
+    private String endereco;
+    private String capacidade;
+    private String responsavel;
+
 }
+
 

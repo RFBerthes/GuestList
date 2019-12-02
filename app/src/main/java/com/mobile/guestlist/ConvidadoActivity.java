@@ -11,7 +11,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.FirebaseApp;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -23,14 +22,14 @@ import androidx.fragment.app.FragmentManager;
 import android.view.Menu;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+public class ConvidadoActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private ViewHolder mViewHolder = new ViewHolder();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_convidado);
 
         this.mViewHolder.mfabAddConvidado = this.findViewById(R.id.fabAddConvidado);
 
@@ -118,8 +117,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.fabAddConvidado){
-            Intent formulario = new Intent(this, FormularioActivity.class);
-            this.startActivity(formulario);
+            Intent novoConvidado = new Intent(this, CadastroConvidadoActivity.class);
+            this.startActivity(novoConvidado);
         }
     }
 

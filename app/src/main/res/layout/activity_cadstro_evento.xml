@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:layout_height="match_parent"
+    tools:context=".CadastroConvidadoActivity">
+
+    <EditText
+        android:id="@+id/etNomeEvento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/txtNomeEvento"/>
+    <EditText
+        android:id="@+id/etData"
+        android:inputType="date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/txtData"/>
+    <EditText
+        android:id="@+id/etHora"
+        android:inputType="datetime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/txtHorario"/>
+    <EditText
+        android:id="@+id/etEndereco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/txtLocalEvento"/>
+    <EditText
+        android:id="@+id/etCapacidade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="@string/txtCapacidade"/>
+
+    <Button
+        android:id="@+id/btnSalvarEvento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txtSalvar"
+        android:layout_margin="10dp"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorWhite"/>
+
+</LinearLayout>

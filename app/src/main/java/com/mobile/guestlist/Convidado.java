@@ -2,8 +2,18 @@ package com.mobile.guestlist;
 
 public class Convidado {
     private int id;
+    private int evento;
     private String nome;
     private int status;
+
+
+    public int getEvento() {
+        return evento;
+    }
+
+    public void setEvento(int evento) {
+        this.evento = evento;
+    }
 
     public int getId(String s) {
         return id;

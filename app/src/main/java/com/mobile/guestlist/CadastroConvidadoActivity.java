@@ -10,14 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class FormularioActivity extends AppCompatActivity implements View.OnClickListener {
+public class CadastroConvidadoActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ViewHolder mViewHolder = new ViewHolder();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_formulario);
+        setContentView(R.layout.activity_cadstro_convidado);
         this.mViewHolder.mEtNome = this.findViewById(R.id.etNome);
         this.mViewHolder.mrbConfirm = this.findViewById(R.id.rbConfirmado);
         this.mViewHolder.mrbPendente = this.findViewById(R.id.rbPendente);
@@ -64,8 +64,8 @@ public class FormularioActivity extends AppCompatActivity implements View.OnClic
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Convidados");
-        DatabaseReference ConvidadoRef = myRef.child("Convidados");
-        ConvidadoRef.push().setValue(c);
+
+        myRef.setValue(c);
 
         if (true) {
             Toast.makeText(this, getString(R.string.sucessoSalvar), Toast.LENGTH_LONG).show();

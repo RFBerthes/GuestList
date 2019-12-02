@@ -24,4 +24,12 @@
     <string name="txtNumero">Numero</string>
     <string name="erroNumero">\"Número é obrigatório\"</string>
     <string name="txtListaEventos">Lista de Eventos</string>
+    <string name="txtAdicionar_evento">ADICIONAR EVENTO</string>
+    <string name="txtNomeEvento">Nome do Evento</string>
+    <string name="txtData">Data</string>
+    <string name="txtHorario">Horário</string>
+    <string name="txtLocalEvento">Local</string>
+    <string name="txtResp">Responsável</string>
+    <string name="txtCapacidade">Capacidade</string>
+    <string name="title_activity_eventos">EventosActivity</string>
 </resources>
