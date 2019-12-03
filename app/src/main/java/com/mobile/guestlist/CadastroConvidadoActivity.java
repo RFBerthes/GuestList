@@ -65,7 +65,7 @@ public class CadastroConvidadoActivity extends AppCompatActivity implements View
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Convidados");
 
-        myRef.setValue(c);
+        myRef.push().setValue(c);
 
         if (true) {
             Toast.makeText(this, getString(R.string.sucessoSalvar), Toast.LENGTH_LONG).show();
