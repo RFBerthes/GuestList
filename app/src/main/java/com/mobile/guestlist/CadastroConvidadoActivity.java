@@ -46,26 +46,24 @@ public class CadastroConvidadoActivity extends AppCompatActivity implements View
             return;
         }
 
-        Convidado c = new Convidado();
+        Convidado convidado = new Convidado();
 
-        c.setNome(this.mViewHolder.mEtNome.getText().toString());
+        convidado.setNome(this.mViewHolder.mEtNome.getText().toString());
 
         if (this.mViewHolder.mrbConfirm.isChecked()) {
-            c.setStatus(Constantes.CONFIRMACAO.CONFIRMADO);
+            convidado.setStatus(Constantes.CONFIRMACAO.CONFIRMADO);
         } else if (this.mViewHolder.mrbPendente.isChecked()) {
-            c.setStatus(Constantes.CONFIRMACAO.PENDENTE);
+            convidado.setStatus(Constantes.CONFIRMACAO.PENDENTE);
         } else if (this.mViewHolder.mrbNegado.isChecked()) {
-            c.setStatus(Constantes.CONFIRMACAO.NEGADO);
+            convidado.setStatus(Constantes.CONFIRMACAO.NEGADO);
         } else {
-
-            c.setStatus(Constantes.CONFIRMACAO.NEGADO);
+            convidado.setStatus(Constantes.CONFIRMACAO.NEGADO);
         }
 
-        // Write a message to the database
+        // Insere no firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Convidados");
-
-        myRef.setValue(c);
+        myRef.push().setValue(convidado);
 
         if (true) {
             Toast.makeText(this, getString(R.string.sucessoSalvar), Toast.LENGTH_LONG).show();

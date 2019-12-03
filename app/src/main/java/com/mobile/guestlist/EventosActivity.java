@@ -52,7 +52,7 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
 
         lvEventos = findViewById(R.id.lvEventos);
 
-        arrayAdapterEvento = new ArrayAdapter<Evento>(this, R.layout.layout_lista_eventos, listEvento);
+        arrayAdapterEvento = new ArrayAdapter<Evento>(this, android.R.layout.simple_list_item_1, listEvento);
         lvEventos.setAdapter(arrayAdapterEvento);
 
         query = databaseReference.child("Eventos").orderByChild("nome");
@@ -62,6 +62,7 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot objSnapshot:dataSnapshot.getChildren()){
                     Evento ev = objSnapshot.getValue(Evento.class);
+                    ev.setId( dataSnapshot.getKey() );
                     listEvento.add(ev);
                 }
                 arrayAdapterEvento.notifyDataSetChanged();

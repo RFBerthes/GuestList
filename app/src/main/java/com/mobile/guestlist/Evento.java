@@ -2,13 +2,22 @@ package com.mobile.guestlist;
 
 public class Evento {
 
-    private int id;
+    private String id;
+    private String nome;
+    private String data;
+    private String hora;
+    private String endereco;
+    private String capacidade;
+    private String responsavel;
 
-    public int getId() {
+    public Evento() {
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -60,18 +69,9 @@ public class Evento {
         this.responsavel = responsavel;
     }
 
-    private String nome;
-    private String data;
-    private String hora;
-    private String endereco;
-    private String capacidade;
-    private String responsavel;
-
-
     @Override
     public String toString() {
         return "Evento{" +
-                "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", data='" + data + '\'' +
                 ", hora='" + hora + '\'' +

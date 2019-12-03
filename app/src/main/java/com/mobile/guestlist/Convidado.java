@@ -1,26 +1,38 @@
 package com.mobile.guestlist;
 
 public class Convidado {
-    private int id;
-    private int evento;
+    private String id;
+    private String evento;
     private String nome;
     private int status;
 
-
-    public int getEvento() {
-        return evento;
+    public Convidado() {
     }
 
-    public void setEvento(int evento) {
-        this.evento = evento;
+    @Override
+    public String toString() {
+        return "Convidado{" +
+                "id='" + id + '\'' +
+                ", evento='" + evento + '\'' +
+                ", nome='" + nome + '\'' +
+                ", status=" + status +
+                '}';
     }
 
-    public int getId(String s) {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public String getEvento() {
+        return evento;
+    }
+
+    public void setEvento(String evento) {
+        this.evento = evento;
     }
 
     public String getNome() {
@@ -39,12 +51,8 @@ public class Convidado {
         this.status = status;
     }
 
-    public Convidado() {
-    }
 
-    public Convidado(int id, String nome, int status) {
-        this.id = id;
-        this.nome = nome;
-        this.status = status;
-    }
+
+
+
 }
