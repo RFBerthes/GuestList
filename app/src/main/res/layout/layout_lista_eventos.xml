@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/layout"
     android:orientation="vertical"
     android:padding="10dp">
 
@@ -11,7 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="3"
         android:hint="@string/txtNomeEvento"
-        android:textColor="#fff"
         android:textSize="20sp" />
 
     <LinearLayout
@@ -24,7 +24,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:hint="@string/txtData"
-            android:textColor="#fff"
             android:textSize="20sp" />
 
         <TextView
@@ -33,7 +32,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:hint="@string/txtHorario"
-            android:textColor="#fff"
             android:textSize="20sp" />
 
     </LinearLayout>
@@ -42,20 +40,14 @@
         android:id="@+id/tvLocalEvento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
         android:hint="@string/txtLocalEvento"
-        android:textColor="#fff"
         android:textSize="20sp" />
-
-
 
     <TextView
         android:id="@+id/tvRespEvento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
         android:hint="@string/txtResp"
-        android:textColor="#fff"
         android:textSize="20sp" />
 
 

@@ -3,13 +3,12 @@ package com.mobile.guestlist;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.ListView;
-
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -17,25 +16,20 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventosActivity extends AppCompatActivity implements View.OnClickListener{
+public class EventosActivity extends AppCompatActivity {
 
 
-    private ViewHolder mViewHolder = new ViewHolder();
     private ListView lvEventos;
-
-    private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
-
-    private List<Evento> listEvento = new ArrayList<Evento>();
-    private ArrayAdapter<Evento> arrayAdapterEvento;
-
-    ChildEventListener childEventListener;
-    Query query;
+    private List<Evento> listaDeEventos;
+    private AdapterEvento adapterEvento;
+    private FirebaseDatabase database;
+    private DatabaseReference reference;
+    private ChildEventListener childEventListener;
+    private Query query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,24 +37,100 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_eventos);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        inicializaFirebase();
 
-        lvEventos = (ListView) findViewById(R.id.lvEventos);
+        lvEventos = findViewById(R.id.lvEventos);
 
-        arrayAdapterEvento = new ArrayAdapter<Evento>(this, android.R.layout.simple_list_item_1, listEvento);
-        lvEventos.setAdapter(arrayAdapterEvento);
+        listaDeEventos = new ArrayList<>();
+        adapterEvento = new AdapterEvento(listaDeEventos, EventosActivity.this, getLayoutInflater());
+        lvEventos.setAdapter(adapterEvento);
 
-        query = databaseReference.child("Eventos").orderByChild("nome");
-
-        query.addValueEventListener(new ValueEventListener() {
+        FloatingActionButton fabAddEvento = findViewById(R.id.btnNovoEvento);
+        fabAddEvento.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot objSnapshot:dataSnapshot.getChildren()){
-                    Evento ev = objSnapshot.getValue(Evento.class);
-                    ev.setId( dataSnapshot.getKey() );
-                    listEvento.add(ev);
+            public void onClick(View view) {
+                Intent i = new Intent(EventosActivity.this, CadastroEventoActivity.class);
+                startActivity( i );
+            }
+        });
+
+        lvEventos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Evento ev = (Evento) adapterView.getItemAtPosition(i);
+
+                Intent intent = new Intent(EventosActivity.this, ConvidadoActivity.class);
+                //intent.putExtra("acao", "editar");
+                intent.putExtra("keyEvento", ev.getKeyEvento() );
+                startActivity( intent );
+            }
+        });
+
+        lvEventos.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //excluir( (Evento) adapterView.getItemAtPosition(i)  );
+                return true;
+            }
+        });
+
+/*        private void excluir (final Evento evento){
+            AlertDialog.Builder alerta = new AlertDialog.Builder(this);
+            alerta.setTitle("Excluir Produto");
+            alerta.setMessage("Confirma a exclusão do produto "
+                    + evento.getNome() + "?");
+            alerta.setNeutralButton("Cancelar", null);
+            alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+
                 }
-                arrayAdapterEvento.notifyDataSetChanged();
+            });
+            alerta.show();
+
+        }*/
+
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        listaDeEventos.clear();
+
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference();
+        query = reference.child("Eventos").orderByChild("nome");
+
+        childEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                Evento ev = new Evento();
+                ev.setKeyEvento ( dataSnapshot.getKey());
+                ev.setNome( dataSnapshot.child("nome").getValue(String.class) );
+                ev.setData( dataSnapshot.child("data").getValue(String.class) );
+                ev.setHora( dataSnapshot.child("hora").getValue(String.class) );
+                ev.setEndereco( dataSnapshot.child("endereco").getValue(String.class) );
+                ev.setResponsavel( dataSnapshot.child("responsavel").getValue(String.class) );
+                listaDeEventos.add( ev );
+                adapterEvento.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
             }
 
@@ -68,49 +138,17 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-
-
-        });
-
-
-
-        this.mViewHolder.mfabAddEvento = this.findViewById(R.id.btnNovoEvento);
-        this.setListeners();
-
-    }
-
-    private void inicializaFirebase() {
-
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
-    }
-
-
-    private void setListeners() {
-        this.mViewHolder.mfabAddEvento.setOnClickListener(this);
+        };
+        query.addChildEventListener( childEventListener );
 
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-
+    protected void onStop() {
+        super.onStop();
+        query.removeEventListener( childEventListener );
     }
 
 
-    @Override
-    public void onClick(View v) {
-
-        int id = v.getId();
-        if (id == R.id.btnNovoEvento){
-            Intent novoEvento = new Intent(this, CadastroEventoActivity.class);
-            this.startActivity(novoEvento);
-        }
-
-    }
-
-    private static class ViewHolder{
-        FloatingActionButton mfabAddEvento;
-    }
 
 }

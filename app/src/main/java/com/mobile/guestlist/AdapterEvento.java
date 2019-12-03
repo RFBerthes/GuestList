@@ -33,18 +33,44 @@ public class AdapterEvento extends BaseAdapter {
         return listEvento.get(i);
     }
 
-    public long getItemId(String s) {
-        return listEvento.get(s);
+    @Override
+    public long getItemId(int i) {
+        return 0;
     }
+
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
+        EventoSuporte es = new EventoSuporte();
+
+        if ( view == null){
+            view = inflater.inflate(R.layout.layout_lista_eventos, null);
+            es.tvNomeEvento = view.findViewById(R.id.tvNomeEvento);
+            es.tvDataEvento = view.findViewById(R.id.tvDataEvento);
+            es.tvHoraEvento = view.findViewById(R.id.tvHoraEvento);
+            es.tvLocalEvento = view.findViewById(R.id.tvLocalEvento);
+            es.tvRespEvento = view.findViewById(R.id.tvRespEvento);
+            es.layout = view.findViewById(R.id.layout);
+
+            view.setTag( es );
+        }else {
+            es = (EventoSuporte) view.getTag();
+        }
+
+        Evento evento = listEvento.get( i );
+        es.tvNomeEvento.setText( evento.getNome() );
+        es.tvDataEvento.setText( evento.getData() );
+        es.tvHoraEvento.setText( evento.getHora() );
+        es.tvLocalEvento.setText( evento.getEndereco() );
+        es.tvRespEvento.setText( evento.getResponsavel() );
+
+        return view;
+
     }
 
     private class EventoSuporte{
-        //parei aqui
-        TextView tvListaNome, tvCamisa, tvPosicao;
+        TextView tvNomeEvento, tvDataEvento, tvHoraEvento, tvLocalEvento, tvRespEvento;
         LinearLayout layout;
     }
 }

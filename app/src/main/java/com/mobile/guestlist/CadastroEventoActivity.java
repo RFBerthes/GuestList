@@ -6,8 +6,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -15,7 +13,7 @@ public class CadastroEventoActivity extends AppCompatActivity {
 
 
 
-    EditText nomeEvento, dataEvento, horaEvento, enderecoEvento, capacidadeEvento;
+    EditText nomeEvento, dataEvento, horaEvento, enderecoEvento, capacidadeEvento, responsavelEvento;
     Button bntSalvar;
     Evento evento;
 
@@ -30,6 +28,7 @@ public class CadastroEventoActivity extends AppCompatActivity {
         horaEvento = findViewById(R.id.etHora);
         enderecoEvento = findViewById(R.id.etEndereco);
         capacidadeEvento = findViewById(R.id.etCapacidade);
+        responsavelEvento = findViewById(R.id.etResponsavel);
         bntSalvar = findViewById(R.id.btnSalvarEvento);
         evento = new Evento();
 
@@ -54,6 +53,7 @@ public class CadastroEventoActivity extends AppCompatActivity {
         String hora = horaEvento.getText().toString();
         String endereco = enderecoEvento.getText().toString();
         String capacidade = capacidadeEvento.getText().toString();
+        String responsavel = capacidadeEvento.getText().toString();
 
 
         evento.setNome(nome);
@@ -61,6 +61,7 @@ public class CadastroEventoActivity extends AppCompatActivity {
         evento.setHora(hora);
         evento.setEndereco(endereco);
         evento.setCapacidade(capacidade);
+        evento.setResponsavel(responsavel);
 
         // Insere no firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();

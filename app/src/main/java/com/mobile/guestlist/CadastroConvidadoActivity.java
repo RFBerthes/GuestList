@@ -13,11 +13,14 @@ import com.google.firebase.database.FirebaseDatabase;
 public class CadastroConvidadoActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ViewHolder mViewHolder = new ViewHolder();
+    private String keyEvento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadstro_convidado);
+
+        keyEvento = getIntent().getExtras().getString("keyEvento"); //recebe idEvento de EventosActivity
         this.mViewHolder.mEtNome = this.findViewById(R.id.etNome);
         this.mViewHolder.mrbConfirm = this.findViewById(R.id.rbConfirmado);
         this.mViewHolder.mrbPendente = this.findViewById(R.id.rbPendente);
@@ -49,7 +52,6 @@ public class CadastroConvidadoActivity extends AppCompatActivity implements View
         Convidado convidado = new Convidado();
 
         convidado.setNome(this.mViewHolder.mEtNome.getText().toString());
-
         if (this.mViewHolder.mrbConfirm.isChecked()) {
             convidado.setStatus(Constantes.CONFIRMACAO.CONFIRMADO);
         } else if (this.mViewHolder.mrbPendente.isChecked()) {
@@ -59,16 +61,13 @@ public class CadastroConvidadoActivity extends AppCompatActivity implements View
         } else {
             convidado.setStatus(Constantes.CONFIRMACAO.NEGADO);
         }
+        convidado.setEvento(keyEvento);
+
 
         // Insere no firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Convidados");
-<<<<<<< HEAD
         myRef.push().setValue(convidado);
-=======
-
-        myRef.push().setValue(c);
->>>>>>> 5db76bd81b6244957faab6159afc0639e8d96acd
 
         if (true) {
             Toast.makeText(this, getString(R.string.sucessoSalvar), Toast.LENGTH_LONG).show();

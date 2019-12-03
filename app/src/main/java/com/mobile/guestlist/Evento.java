@@ -2,7 +2,7 @@ package com.mobile.guestlist;
 
 public class Evento {
 
-    private String id;
+    private String keyEvento;
     private String nome;
     private String data;
     private String hora;
@@ -13,12 +13,12 @@ public class Evento {
     public Evento() {
     }
 
-    public String getId() {
-        return id;
+    public String getKeyEvento() {
+        return keyEvento;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setKeyEvento(String keyEvento) {
+        this.keyEvento = keyEvento;
     }
 
     public String getNome() {
@@ -72,6 +72,7 @@ public class Evento {
     @Override
     public String toString() {
         return "Evento{" +
+                "keyEvento='" + keyEvento + '\'' +
                 ", nome='" + nome + '\'' +
                 ", data='" + data + '\'' +
                 ", hora='" + hora + '\'' +

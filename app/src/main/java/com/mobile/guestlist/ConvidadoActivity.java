@@ -25,6 +25,7 @@ import android.view.View;
 public class ConvidadoActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private ViewHolder mViewHolder = new ViewHolder();
+    private String keyEvento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,8 @@ public class ConvidadoActivity extends AppCompatActivity implements NavigationVi
         setContentView(R.layout.activity_convidado);
 
         this.mViewHolder.mfabAddConvidado = this.findViewById(R.id.fabAddConvidado);
+        keyEvento = getIntent().getExtras().getString("keyEvento"); //recebe idEvento de EventosActivity
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -117,8 +120,9 @@ public class ConvidadoActivity extends AppCompatActivity implements NavigationVi
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.fabAddConvidado){
-            Intent novoConvidado = new Intent(this, CadastroConvidadoActivity.class);
-            this.startActivity(novoConvidado);
+            Intent i = new Intent(this, CadastroConvidadoActivity.class);
+            i.putExtra("keyEvento", keyEvento);  //Envia idEvento para CadastroEvento
+            this.startActivity(i);
         }
     }
 
