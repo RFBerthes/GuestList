@@ -10,6 +10,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
@@ -24,16 +25,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EventosActivity extends AppCompatActivity implements View.OnClickListener{
 
 
-    DatabaseReference databaseReference;
     private ViewHolder mViewHolder = new ViewHolder();
     private ListView lvEventos;
-    ArrayList<String> arrayEventos = new ArrayList<>();
-    ArrayAdapter<String> arrayAdapter;
 
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
+
+    private List<Evento> listEvento = new ArrayList<Evento>();
+    private ArrayAdapter<Evento> arrayAdapterEvento;
+
+    ChildEventListener childEventListener;
+    Query query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,31 +48,23 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_eventos);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        inicializaFirebase();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Eventos");
         lvEventos = findViewById(R.id.lvEventos);
-        arrayAdapter = new ArrayAdapter<String>(this, R.layout.layout_lista_eventos);
-        lvEventos.setAdapter(arrayAdapter);
-        databaseReference.addChildEventListener(new ChildEventListener() {
+
+        arrayAdapterEvento = new ArrayAdapter<Evento>(this, R.layout.layout_lista_eventos, listEvento);
+        lvEventos.setAdapter(arrayAdapterEvento);
+
+        query = databaseReference.child("Eventos").orderByChild("nome");
+
+        query.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                String valor=dataSnapshot.getValue(Evento.class).toString();
-                arrayEventos.add(valor);
-                arrayAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot objSnapshot:dataSnapshot.getChildren()){
+                    Evento ev = objSnapshot.getValue(Evento.class);
+                    listEvento.add(ev);
+                }
+                arrayAdapterEvento.notifyDataSetChanged();
 
             }
 
@@ -73,12 +72,21 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
+
+
         });
+
 
 
         this.mViewHolder.mfabAddEvento = this.findViewById(R.id.btnNovoEvento);
         this.setListeners();
 
+    }
+
+    private void inicializaFirebase() {
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
     }
 
 

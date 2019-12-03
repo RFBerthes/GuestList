@@ -67,6 +67,19 @@ public class Evento {
     private String capacidade;
     private String responsavel;
 
+
+    @Override
+    public String toString() {
+        return "Evento{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", data='" + data + '\'' +
+                ", hora='" + hora + '\'' +
+                ", endereco='" + endereco + '\'' +
+                ", capacidade='" + capacidade + '\'' +
+                ", responsavel='" + responsavel + '\'' +
+                '}';
+    }
 }
 
 
