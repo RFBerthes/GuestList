@@ -63,7 +63,12 @@ public class CadastroConvidadoActivity extends AppCompatActivity implements View
         // Insere no firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Convidados");
+<<<<<<< HEAD
         myRef.push().setValue(convidado);
+=======
+
+        myRef.push().setValue(c);
+>>>>>>> 5db76bd81b6244957faab6159afc0639e8d96acd
 
         if (true) {
             Toast.makeText(this, getString(R.string.sucessoSalvar), Toast.LENGTH_LONG).show();

@@ -2,9 +2,15 @@ package com.mobile.guestlist;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -12,17 +18,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +45,7 @@ public class EventosActivity extends AppCompatActivity implements View.OnClickLi
         setSupportActionBar(toolbar);
         inicializaFirebase();
 
-        lvEventos = findViewById(R.id.lvEventos);
+        lvEventos = (ListView) findViewById(R.id.lvEventos);
 
         arrayAdapterEvento = new ArrayAdapter<Evento>(this, android.R.layout.simple_list_item_1, listEvento);
         lvEventos.setAdapter(arrayAdapterEvento);
