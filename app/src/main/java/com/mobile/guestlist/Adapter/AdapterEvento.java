@@ -1,4 +1,4 @@
-package com.mobile.guestlist;
+package com.mobile.guestlist.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.mobile.guestlist.Evento;
+import com.mobile.guestlist.R;
 
 import java.util.List;
 
