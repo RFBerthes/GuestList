@@ -53,7 +53,7 @@ public class CadastroEventoActivity extends AppCompatActivity {
         String hora = horaEvento.getText().toString();
         String endereco = enderecoEvento.getText().toString();
         String capacidade = capacidadeEvento.getText().toString();
-        String responsavel = capacidadeEvento.getText().toString();
+        String responsavel = responsavelEvento.getText().toString();
 
 
         evento.setNome(nome);
